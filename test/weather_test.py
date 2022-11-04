@@ -2,9 +2,9 @@ from interview import weather
 import io
 import pandas as pd
 
-def length_check(writer, df):
+def length_check(reader, df):
     unique = set()
-    for _, row in pd.read_csv(writer).iterrows():
+    for _, row in pd.read_csv(reader).iterrows():
         timestamp = row['Measurement Timestamp Label'].split()
         unique.add((row['Station Name'], timestamp[0]))
     return len(df.index)==len(unique)
@@ -22,6 +22,6 @@ def test_suite():
     reader = "data/chicago_beach_weather.csv"
     writer = io.StringIO()
     weather.process_csv(reader, writer)
-    df = pd.read_csv(reader)
-    assert length_check(writer, df)
+    df = pd.read_csv(writer)
+    assert length_check(reader, df)
     assert sanity_check(df)

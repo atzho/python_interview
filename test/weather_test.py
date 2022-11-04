@@ -22,6 +22,6 @@ def test_suite():
     reader = "data/chicago_beach_weather.csv"
     writer = io.StringIO()
     weather.process_csv(reader, writer)
-    df = pd.read_csv(writer)
+    df = pd.read_csv(reader)
     assert length_check(writer, df)
     assert sanity_check(df)
